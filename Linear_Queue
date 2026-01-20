@@ -1,0 +1,43 @@
+class LinearQueue:
+    def __init__(self,size):
+        sef.data = [] * size
+        self.size = size
+        self.frontpointer = -1
+        self.rearpointer = -1
+        
+    def is_empty(self):
+        return self.frontpointer == self.rearpointer == -1
+    def is_full(self):
+        return self.size-1 == self.rearpointer
+    
+    def enqueue(self,data):
+        if self.is_full():
+            return "Queue is Full"
+        else:
+            if self.is_empty():
+                self.rearpointer = 0
+                self.frontpointer = 0
+            else:
+                self.rearpointer += 1
+            self.data[self.rearpointer] = data
+    
+    def dequeue(self):
+        if self.is_empty():
+            return "Queue is empty"
+        else:
+            popItem = self.data[self.front_pointer]
+            if self.rearpointer == self.frontpointer == 0:
+                self.rearpointer = -1
+                self.frontpointer = -1
+            else:
+                self.frontpointer += 1
+            return popItem
+        
+    def display(self):
+        if self.is_empty():
+            return "Queue is empty"
+        else:
+            print("Front of queue: ")
+            for i in self.data[self.frontpointer:self.rearpointer+1]:
+                print(i)
+            print("Back of Queue")
