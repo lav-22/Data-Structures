@@ -1,0 +1,34 @@
+def hash_score(x):
+    hashtotal = 0
+    Hash = 0
+    for char in x:
+        hashtotal += ord(char)
+    Hash = hashtotal % 500
+    return Hash
+
+hash_table = [None for i in range(500)]
+
+def insert_hashtotal(x):
+    hash_value = hash_score(x)
+    loc = hash_value
+    
+    while hash_total[loc]:
+        loc = (loc + 1) % 500
+        if loc == hash_value:
+            return False
+        
+    hash_table[loc] = x
+    return True
+
+def ht_search(x):
+    hash_value = hash_score(x)
+    loc = hash_value
+    
+    while hash_table[loc] != None:
+        if hash_table[loc] == x:
+            return True
+        loc = (loc + 1) % 500
+        if loc == hash_value:
+            return False
+    return False
+
