@@ -1,0 +1,89 @@
+class Node:
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next = next_node
+        
+class LinkedList:
+    def __init__(self,data, next_node=None):
+        self.head = None
+        self.data = data
+        self.next = next_node
+        
+    def insert_to_back(self, data):
+        if self.head is None:
+            self.head = Node(data)
+        elif self.head.next is None:
+            self.head.next = LinkedList(data)
+        else:
+            cur_node = self.head
+            while cur_node.next:
+                cur_node = cur_node.next
+            cur_node.next = LinkedList(data)
+            
+    def insert_to_front(self, data):
+        if self.head is None:
+            self.head = Node(data)
+        else:
+            self.head = Node(data, self.head)
+            
+    def insert_ordered(self, data):
+        if self.head is None:
+            self.head = Node(data)
+        elif data < self.head.data:
+            self.head = Node(data, self.head)
+        else:
+            cur_node = self.head
+            while cur_node.next and data > cur_node.data:
+                cur_node = cur_node.next
+                
+            cur_node = Node(data, cur_node.next)
+            
+    def delete_ordered(self, data):
+        if self.head is None:
+            return "Data not in Linked List."
+        else:
+            if self.head.data == data:
+                self.head = self.head.next
+            else:
+                cur_node = self.head
+                prev_node = self.head
+                while cur_node.next and data != cur_node.next.data:
+                    prev_node = cur_node
+                    cur_node = cur_node.next
+                if cur_node.next.data is None:
+                    return "Data not found"
+                cur_node.next = cur_node.next.next
+                
+            
+    def delete_from_front(self):
+        if self.head is None:
+            return "Empty Linked List"
+        else:
+            popItem = self.head.data
+            self.head = self.head.next
+            return popItem
+            
+    def delete_from_back(self):
+        if self.head is None:
+            return "Empty Linked List, cannot remove node"
+        elif self.head.next is None:
+            popItem = self.head.data
+            self.head.next = None
+            return popItem
+        else:
+            second_last_node = self.head
+            while second_last_node.next.next:
+                second_last_node = second_last_node.next
+            popItem = second_last_node.next.data
+            second_last_node.next = None
+            return popItem
+        
+    def display(self):
+        is self.head is None:
+            print("Empty Linked List")
+        else:
+            cur_node = self.head
+            while cur_node:
+                print(cur_node.data, end=" -> ")
+                cur_node = cur_node.next
+            print("None")
