@@ -1,0 +1,110 @@
+class Node:
+    def __init__(self,data, next=None):
+        self.data = data
+        self.next = next_node
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def insert_at_front(self,data):
+        if self.head is None:
+            self.head= Node(data)
+        else:
+            self.head = Node(data, self.head)
+    def insert_at_back(self, data):
+        if self.head is None:
+            self.head = Node(data)
+        else:
+            cur_node = self.head
+            while cur_node.next:
+                cur_node = cur_node.next
+            cur_node.next = Node(data)
+        
+    def insert_ordered(self,data):
+        if self.head is None:
+            self.head = Node(data)
+        else:
+            if data < self.head.data:
+                self.head = Node(data, self.head)
+            else:
+                new_node = Node(data)
+                cur_node = self.head
+                while cur_node and data > cur_node.data:
+                    cur_node = cur_node.next
+                new_node.next = cur_node
+                cur_node = new_node
+                
+    def delete_from_front(self):
+        if self.head is None:
+            return "Empty LinkedList"
+        else:
+            self.head = self.head.next
+            
+    def delete_from_back(self):
+        if self.head is None:
+            return "Empty LinkedList"
+        else:
+            if self.head.next is None:
+                self.head = None
+            else:
+                second_last_node = self.head
+                while second_last_node.next.next:
+                    second_last_node = second_last_node.next
+                    
+                second_last_node.next = None
+                
+        def delete_ordered(self,value):
+            if self.head is None:
+                return "Empty LinkedList"
+            else:
+                if value == self.head.data:
+                    self.head = self.head.next
+                else:
+                    cur_node = self.head
+                    while cur_node.next and cur_node.next.data != value:
+                        cur_node = cur_node.next
+                            
+                if cur_node.next is None:
+                    return "Not in LinkedList"
+                cur_node.next = cur_node.next.next
+                    
+                    
+
+class LinkedQueue:
+    def __init__(self):
+        self.queue = LinkedList()
+        
+    def enqueue(self, data):
+        self.queue.postpend(data)
+        
+    def dequeue(self):
+        if self.queue.head is None:
+            return 
+        else:
+            value = self.queue.head.data
+            self.queue.head = self.queue.head.next
+            return value
+        
+    def display(self):
+        self.queue.display()
+        
+    def size(self):
+        if self.queue.head is None:
+            return None
+        else:
+            cur_node = self.queue.head
+            size = 0
+            while cur_node:
+                size += 1
+                cur_node = cur_node.next
+            return size
+        
+    def front(self):
+        if self.queue.head is None:
+            return None
+        return self.queue.head.data
+
+
+
+        
