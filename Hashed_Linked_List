@@ -1,0 +1,74 @@
+def hashtotal(ID):
+    hashtotal = 0
+    for i in range(1, len(ID)):
+        hashtotal += ord(ID[i])
+    hashed = hashtotal % 500
+    return hashed
+
+hash_table = [None for i in range(500)]
+
+def insert_wLinearProbing(ID):
+    hash_value = hashtotal(ID)
+    location = hash_value
+    
+    while hash_table[location] != None:
+        location = (location + 1) % 500
+        if location == hash_value:
+            return False # Not inserted
+    hash_table[location] = ID
+    return True
+
+def search(ID):
+    hash_value = hashtotal(ID)
+    location = hash_value
+    
+    while hash_table[location]:
+        if hash_table[location] == ID:
+            return True
+        else:
+            location = (location + 1) % 500
+            if location == hash_value:
+                return False
+    return False
+
+
+class Node:
+    def __init__(self, data, Next = None):
+        self.data = data
+        self.next = Next
+        
+    def get_data(self):
+        return self.data
+    
+    def get_next(self):
+        return self.next
+    
+    def __repr__(self):
+        if self.next == None:
+            next_data = None
+        else:
+            next_data = self.next.data
+        return f"{self.data} --> {next_data}"
+        
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        
+    def postpend(self, data):
+        if self.head == None:
+            self.head = Node(data)
+            self.tail = self.head
+            return "hi"
+        else:
+            self.tail.next = Node(data)
+            self.tail = self.tail.next
+            return "hey"
+            
+    def traverse(self):
+        cur_node = self.head
+        while cur_node:
+            print(cur_node)
+            cur_node = cur_node.next
+    
