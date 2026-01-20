@@ -1,0 +1,93 @@
+class FreeSpaceLinkedList:
+    def __init__(self, size):
+        self.data = [None] * size
+        self.pointer = [i for i in range(1,size)] + [-1]
+        self.head = -1
+        self.next_free = 0
+        
+    def insert(self, data):
+        # When full
+        if self.next_free == -1:
+            print(f"Linked list is full! Data not entered: {data}")
+        # When LL is empty
+        elif self.head == -1:
+            self.data[self.next_free] = data
+            self.pointer[self.next_free], self.head, self.next_free = -1, self.next_free, self.pointer[self.next_free]
+            
+        else:
+            # insert at the start
+            if data <= self.data[self.head]:
+                self.data[self.next_free] = data
+                self.pointer[self.next_free], self.head, self.next_free = self.head, self.next_free, self.data[self.next_free]
+            
+            else:
+                cur_pointer = self.head
+                prev_pointer = -1
+                
+                # Traverse the list to find insertion point
+                while cur_node != -1 and data > self.data[cur_pointer]:
+                    prev_pointer = cur_pointer
+                    cur_pointer = self.pointer[cur_pointer]
+                    
+                # Insert in the middle of list
+                if cur_pointer != -1:
+                    self.data[self.next_free] = data
+                    self.pointer[self.next_free], self.pointer[prev_pointer], self.next_free = self.pointer[prev_pointer], self.next_free, self.pointer[self.next_free]
+                
+                # Insert at the end
+                else:
+                    self.data[self.next_free] = data
+                    self.pointer[self.next_free], self.pointer[prev_pointer], self.next_free = -1, self.next_free, self.pointer[self.next_free]
+                    
+                    
+    def delete(self, data):
+        # when empty
+        if self.head == -1:
+            print("Data not found in list")
+            
+        else:
+            #delete from start
+            if data == self.data[self.head]:
+                self.data[self.head] = None
+                self.pointer[self.head], self.head, self.next_free = self.next_free, self.pointer[self.head], self.head
+            else:
+                cur_pointer = self.head
+                prev_pointer = -1
+                
+                #Traverse to find item to delete
+                while cur_pointer != -1 and data > self.data[cur_pointer]:
+                    prev_pointer = cur_pointer
+                    cur_pointer = self.pointer[cur_pointer]
+                
+                #delete middle or end of the list
+                if cur_pointer != -1 and data == self.data[cur_pointer]:
+                    self.data[cur_pointer] = None
+                    self.pointer[cur_pointer], self.pointer[prev_pointer], self.next_free = self.next_free, self.pointer[cur_pointer], self.pointer[prev_pointer]
+                
+                #data not found
+                else:
+                    print("Data not found in linked list")
+        
+    def search(self, data):
+        cur_pointer = self.head
+        while cur_pointer != -1 and data > self.data[cur_pointer]:
+            cur_pointer = self.pointer[cur_pointer]
+        return data == self.data[cur_pointer]
+    
+    def size(self):
+        count = 0
+        cur_pointer = self.head
+        while cur_pointer != -1:
+            count += 1
+            cur_pointer = self.pointer[cur_pointer]
+        return count
+    
+    def return_as_list(self):
+        result = []
+        cur_pointer = self.head
+        while cur_pointer  != -1:
+            result.append(self.data[cur_pointer])
+            cur_pointer = self.pointer[cur_pointer]
+            
+        return result
+        
