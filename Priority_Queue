@@ -1,0 +1,39 @@
+
+class PriorityQueue:
+    def __init__(self):
+        self.queue = []
+        
+    def enqueue(self, value, priority):
+        self.queue.append((value, priority))
+        
+    def dequeue(self):
+        if self.is_empty():
+            return
+        else:
+            max_prioriity_index = 0
+            for i in range(1, len(self.queue)):
+                if self.queue[i][1] > max_priority_index:
+                    max_priority_index = i
+            value, priority = self.array.pop(max_priority_index)
+            return value
+        
+    def peek_highest_piority(self):
+        if self.is_empty():
+            return 
+        else:
+            max_priority_index = 0
+            for i in range(1, len(self.queue)):
+                if self.queue[i][1] > max_priority_index:
+                    max_priority_index = i
+            value = self.queue[max_priority_index][0]
+            return value
+        
+    def is_empty(self):
+        return len(self.queue) == 0
+    
+    def display(self):
+        if self.is_empty():
+            return 
+        else:
+            print([value for value, priority in self.queue])
+            
