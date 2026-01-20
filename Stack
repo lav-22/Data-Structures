@@ -1,0 +1,43 @@
+class Stack:
+    def __init__(self,size):
+        self.array = [None] * size
+        self.size= size
+        self.toppointer = -1
+        self.basepointer = -1
+    
+    def is_empty(self):
+        return self.basepointer == -1
+    def is_full(self):
+        return self.toppointer == self.size-1
+    
+    def push(self,data):
+        if self.is_full():
+            return "stack is full"
+        else:
+            if self.is_empty():
+                self.toppointer = 0
+                self.basepointer = 0
+            else:
+                self.toppointer += 1
+            self.array[self.toppointer] = data
+            
+    def pop(self):
+        if self.is_empty():
+            return "stack is empty"
+        else:
+            popItem = self.array[self.toppointer]
+            self.toppointer -= 1
+            return popItem
+        
+    def peek(self):
+        if not self.is_empty():
+            return self.array[self.toppointer]
+        else:
+            return "stack is empty"
+    
+    def display(self):
+        print("Base of Stack:")
+        for i in self.array[self.basepointer:self.toppointer+1]:
+            print(i)
+        print("Top of stack")
+                
