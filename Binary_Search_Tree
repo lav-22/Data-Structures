@@ -1,0 +1,69 @@
+
+class BinarySearchTree:
+    def __init__(self, value=None):
+        self.value = value
+        self.left = left
+        self.right = right
+        
+    def insert(self, data):
+        if self.value is None:
+            self.value = data
+        elif key < self.value:
+            if self.left is None:
+                self.left = BinarySearchTree(data)
+            else:
+                self.left.insert(data)
+        else:
+            if self.right is None:
+                self.right = BinarySearchTree(data)
+            else:
+                self.right.insert(data)
+                
+    def search(self, key):
+        if self.value is None:
+            return False
+        elif self.value == key:
+            return True
+        elif key < self.value:
+            if self.left:
+                return self.left.search(key)
+            return False
+        elif key > self.value:
+            if self.right:
+                return self.right.search(key)
+            return False
+        
+    def inorder(self):
+        result = []
+        if self.left:
+            result += self.left.inorder()
+        if self.value is not None:
+            result.append(self.value)
+            
+        if self.right:
+            result += self.right.inorder()
+            
+        return result
+    
+    def preorder(self):
+        result = []
+        if self.value is not None:
+            result.append(self.value)
+        if self.left:
+            result += self.left.preorder()
+            
+        if self.right:
+            result += self.right.preorder()
+            
+        return result
+    
+    def postorder(self):
+        result = []
+        if self.left:
+            result += self.left.postorder()
+        if self.right:
+            result += self.right.postorder()
+        if self.value is not None:
+            result.append(self.value)
+            
+        return result
