@@ -79,7 +79,7 @@ class LinkedList:
             return popItem
         
     def display(self):
-        is self.head is None:
+        if self.head is None:
             print("Empty Linked List")
         else:
             cur_node = self.head
